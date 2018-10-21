@@ -1,77 +1,113 @@
 #include <iostream>
 #include <cstdlib>
+#include <graphics.h>
+
 using namespace std;
-class piece
+bool colision(int wx, int wy, int bx, int by )
 {
-public:
-    int posxy;
-};
-void draw(int tam)
-{
-    cout << '\n';
-    cout << '\n';
-    cout << '\n';
-    for(int x  = 0; x < tam ; x ++)
+    if(wx == bx || wy == by)
     {
+        return true;
+    }
+    return false;
+}
+class Point{
+public:
+    int posx,posy;
+};
+class Tablero{
+public:
+    int i=8, j=8;
+void draw(){
+    for(int x=0;x<i;x++){
+        cout << '\n';
         cout << '\t';
-        cout << '\t';
-        if(x < 2)
-        {
-            cout << " | 1 " << " 1 " << " 1 " << " 1 " << " 1 " << " 1 " << " 1 " <<  " 1 |" << '\n';
+        cout << "|" << " ";
+        for(int y=0;y<j;y++){
+            if((x%2==0 && y%2==0) || (x%2==1 && y%2==1))
+                cout << "N" << " ";
+            else
+                cout << "B" << " ";
         }
-        else if(x > 5)
-        {
-            cout << " | 2 " << " 2 " << " 2 " << " 2 " << " 2 " << " 2 " << " 2 " <<  " 2 |" << '\n';
-        }
-        else
-            cout << " | 0 " << " 0 " << " 0 " << " 0 " << " 0 " << " 0 " << " 0 " <<  " 0 |" << '\n';
+        cout << "|";
     }
 }
+};
+
+//-------------------------------------------------
+class piece{
+public:
+    Point xy;
+    bool ismove = false, islive = true;
+    bool b1n0;
+    int i,j;
+};
+
+class Peon:public piece{
+void MoverPeon(){
+    if(b1n0 == false){
+        if(ismove == false)
+            ismove = true;
+    }
+}
+};
+
+//--------------------------------------------------
+
 int main()
-{
-    system("color f2");
-    int table[64] = {11,12,13,14,15,16,17,18,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,41,42,43,44,45,46,47,48,51,52,53,54,55,56,57,58,61,62,63,64,65,67,68,71,72,73,74,75,76,77,78,81,82,83,84,85,86,87,88};
-    int tam = 8;
-    draw(tam);
-    int nump = 32;
-
-    piece caballoW1;     caballoW1.posxy = table[1];
-    piece caballoW2;     caballoW2.posxy = table[6];
-    piece alfilW1;       alfilW1.posxy = table[2];
-    piece alfilW2;       alfilW2.posxy = table[5];
-    piece torreW1;       torreW1.posxy = table[0];
-    piece torreW2;       torreW2.posxy = table[7];
-    piece reyW;          reyW.posxy = table[4];
-    piece reinaW;        reinaW.posxy = table[3];
-    piece peonW1;        peonW1.posxy = table[8];
-    piece peonW2;        peonW2.posxy = table[9];
-    piece peonW3;        peonW3.posxy = table[10];
-    piece peonW4;        peonW4.posxy = table[11];
-    piece peonW5;        peonW5.posxy = table[12];
-    piece peonW6;        peonW6.posxy = table[13];
-    piece peonW7;        peonW7.posxy = table[14];
-    piece peonW8;        peonW8.posxy = table[15];
-
-    //piezas blancas
-
-
-    piece caballoB1;     caballoB1.posxy = table[57];
-    piece caballoB2;     caballoB2.posxy = table[62];
-    piece alfilB1;       alfilB1.posxy = table[58];
-    piece alfilB2;       alfilB2.posxy = table[61];
-    piece torreB1;       torreB1.posxy = table[56];
-    piece torreB2;       torreB2.posxy = table[63];
-    piece reyB;          reyB.posxy = table[60];
-    piece reinaB;        reinaB.posxy = table[59];
-    piece peonB1;        peonB1.posxy = table[55];
-    piece peonB2;        peonB2.posxy = table[54];
-    piece peonB3;        peonB3.posxy = table[53];
-    piece peonB4;        peonB4.posxy = table[52];
-    piece peonB5;        peonB5.posxy = table[51];
-    piece peonB6;        peonB6.posxy = table[50];
-    piece peonB7;        peonB7.posxy = table[49];
-    piece peonB8;        peonB8.posxy = table[48];
-
+{   system("color f3");
+    Tablero tablero;
+    tablero.draw();
+    Point a0,b0,c0,d0,e0,f0,g0,h0;
+    Point a1,b1,c1,d1,e1,f1,g1,h1;
+    Point a2,b2,c2,d2,e2,f2,g2,h2;
+    Point a3,b3,c3,d3,e3,f3,g3,h3;
+    Point a4,b4,c4,d4,e4,f4,g4,h4;
+    Point a5,b5,c5,d5,e5,f5,g5,h5;
+    Point a6,b6,c6,d6,e6,f6,g6,h6;
+    Point a7,b7,c7,d7,e7,f7,g7,h7;
+    Point arr[8][8]={{a0,a1,a2,a3,a4,a5,a6,a7}
+                    ,{b0,b1,b2,b3,b4,b5,b6,b7}
+                    ,{c0,c1,c2,c3,c4,c5,c6,c7}
+                    ,{d0,d1,d2,d3,d4,d5,d6,d7}
+                    ,{e0,e1,e2,e3,e4,e5,e6,e7}
+                    ,{f0,f1,f2,f3,f4,f5,f6,f7}
+                    ,{g0,g1,g2,g3,g4,g5,g6,g7}
+                    ,{h0,h1,h2,h3,h4,h5,h6,h7}};
+    piece caballoW1;
+    piece caballoW2;
+    piece alfilW1;
+    piece alfilW2;
+    piece torreW1;
+    piece torreW2;
+    piece reyW;
+    piece reinaW;
+    piece peonW1;
+    piece peonW2;
+    piece peonW3;
+    piece peonW4;
+    piece peonW5;
+    piece peonW6;
+    piece peonW7;
+    piece peonW8;
+    piece piezaw[16] = {peonW1,peonW2,peonW3,peonW4,peonW5,peonW6,peonW7,peonW8, alfilW1,alfilW2, torreW1,torreW2,reinaW,reyW, caballoW1,caballoW2};
+    piece caballoB1;
+    piece caballoB2;
+    piece alfilB1;
+    piece alfilB2;
+    piece torreB1;
+    piece torreB2;
+    piece reyB;
+    piece reinaB;
+    piece peonB1;
+    piece peonB2;
+    piece peonB3;
+    piece peonB4;
+    piece peonB5;
+    piece peonB6;
+    piece peonB7;
+    piece peonB8;
+    piece piezab[16] = {peonB1,peonB2,peonB3,peonB4,peonB5,peonB6,peonB7,peonB8, alfilB1,alfilB2, torreB1,torreB2,reinaB,reyB, caballoB1,caballoB2};
     system("pause");
     return 0;
 }
