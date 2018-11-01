@@ -62,20 +62,25 @@ void draw_race(sf::RenderWindow &w,  sf::Color c, int x1, int y1, int wid1, int 
     w.draw(shape);
 }
 
-void posxmove(float &curve, int &posx,int &pos,int &ava)
+void posxmove(float &curve, int &posx,int &pos,int &ava, bool isCurve)
 {
-    if(pos!=0 && ava!=0){
-        if(curve > 0.0)
+    if(pos!=0 && ava!=0 && isCurve == true){
+        int cont = 0;
+        if(isCurve)
+        {
+            if(curve > 0)
+                if(curve != 0.5) cont = 10;
+                else cont -10;
+        }
+        posx+=cont;
+        /*if(curve >=  0.0)
         {
             posx += 10;
-        }
-        if(curve < 0.0)
-        {
-            posx -= 10;
-        }
+        }*/
     }
 
 }
+
 
 
 int main()
@@ -90,11 +95,11 @@ int main()
     ejeH line;
     for(int i = 0; i < 3200; i++)
     {
-
         line.z = i * width_seg;
 
-        if(i < 900 && i<1200) line.curve = 0.5;
-        if(i>2000)line.curve=-0.7;
+        if(i <300 && i<700) line.curve = 0.5;
+
+        if(i>2000) line.curve=-0.7;
 
 
         lines.push_back(line);
@@ -106,18 +111,25 @@ int main()
     int ava = 0;
     int fre = 1;
     int curvemov = 0;
+    bool isCurve ;
 
 
 
     while(app.isOpen())
     {
+        /*if(line.curve != 0)
+        {
+            isCurve = true;
+        }
+        else
+            isCurve = false;*/
         if (ava <= 0)
         {
             fre = 0;
         }
         else
             fre=2;
-        posxmove(line.curve, posx,pos,ava);
+
         pos+=ava;
         sf::Event e;
         while(app.pollEvent(e))
@@ -131,6 +143,7 @@ int main()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) posx -= 22;
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) ava = 200;
         app.clear();
+        posxmove(line.curve, posx,pos,ava,true);
         int star_pos = pos/width_seg;
         float x = 0,dx=0;
        // draw_race(app, sf::Color::White,500,500,200,500,300,100);
@@ -147,7 +160,7 @@ int main()
 
 
             sf::Color grass = (n/3)%2 ? sf::Color(16,200,16) : sf::Color (0,154,0);
-            sf::Color rumble = (n/3)%2 ? sf::Color(255,255,255) : sf::Color  (0,0,0);
+            sf::Color rumble = (n/3)%2 ? sf::Color(255,255,255) : sf::Color  (240,0,0);
             sf::Color road = (n/3)%2 ? sf::Color(107,107,107) : sf::Color (107,107,107);
 
             ejeH p = lines[(n - 1)% N];
