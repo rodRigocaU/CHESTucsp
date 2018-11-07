@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1540959560 source:c:\users\javier\desktop\proyecto.2018\18\estufio30\main.cpp
+	<iostream>
+	<Dinero.h>
+	<Vector.h>
+
+1540956637 source:c:\users\javier\desktop\proyecto.2018\18\estufio30\src\dinero.cpp
+	"Dinero.h"
+	<iostream>
+
+1540959513 c:\users\javier\desktop\proyecto.2018\18\estufio30\include\dinero.h
+
+1540959380 source:c:\users\javier\desktop\proyecto.2018\18\estufio30\src\vector.cpp
+	"Vector.h"
+	<iostream>
+
+1540959405 c:\users\javier\desktop\proyecto.2018\18\estufio30\include\vector.h
+	<Dinero.h>
+

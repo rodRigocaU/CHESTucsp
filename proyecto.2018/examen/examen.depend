@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1541547155 source:c:\users\javier\desktop\proyecto.2018\examen\main.cpp
+	<iostream>
+
+1541549845 source:c:\users\javier\desktop\proyecto.2018\examen\src\animal.cpp
+	"Animal.h"
+
+1541550091 c:\users\javier\desktop\proyecto.2018\examen\include\animal.h
+	<string>
+	<iostream>
+
